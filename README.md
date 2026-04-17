@@ -27,6 +27,11 @@ eliminando sufijos (etiquetas al final del nombre) de manera recursiva.
 ### Creador de Directorios
 Utilidad para la creación de directorios que soporta entrada manual y carga de nombres desde archivos externos (.txt).
 
+### Reorganizador Estructural (Regex)
+Reestructura directorios que siguen el formato Nombre [Versión] [Autor]. El script extrae los datos mediante expresiones regulares, crea una nueva jerarquía basada en el autor y mueve el contenido a subcarpetas de versión, eliminando los directorios originales vacíos. Ideal para organizar librerías o assets de forma jerárquica.
+
+### Limpiador de Carpetas
+Filtra y renombra directorios en el nivel principal de una ruta eliminando palabras específicas. Incluye validaciones de seguridad para evitar nombres vacíos o colisiones con carpetas ya existentes, asegurando una limpieza de nombres rápida y sin pérdida de datos.
 
 ## Requisitos
 -   Python 3.14.0
