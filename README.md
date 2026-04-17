@@ -48,6 +48,10 @@ Herramienta todo-en-uno para la extracción y organización de archivos multimed
 ### 11.- Estandarizar DevLogs
 Herramienta de organización cronológica para bitácoras de desarrollo (Dev Logs). Escanea carpetas con múltiples formatos de fecha, las ordena temporalmente y las renombra con un estándar limpio (Dev Log #X - DD.MM.YYYY), manteniendo un contador independiente para cada año.
 
+### 12.- Conversor Multimedia
+Potente conversor de medios que transforma imágenes a formato WebP y videos a WebM de forma masiva. Utiliza Pillow y MoviePy para optimizar el peso de los archivos de un directorio completo, con opciones para limpieza automática de los archivos originales.
+
+
 
 ## Requisitos
 -   Python 3.14.0
