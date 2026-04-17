@@ -1,71 +1,93 @@
+import os
 import re
+import subprocess
 from pathlib import Path
 
-# Envolvemos el import en un try-except por si ejecutas el script sin tener la librería instalada
+# --- CONFIGURACIÓN DE REQUISITOS ---
+# Si FFmpeg no está en tu PATH global, pon la ruta completa aquí:
+# Ejemplo: "C:\\ffmpeg\\bin\\ffmpeg.exe"
+FFMPEG_PATH = "ffmpeg"
+
 try:
     import yt_dlp
 except ImportError:
-    print("❌ Falta la librería 'yt-dlp'. Instálala ejecutando: pip install yt-dlp")
+    print("❌ Error: La librería 'yt-dlp' no está instalada.")
+    print("👉 Instálala con: pip install yt-dlp")
     exit()
 
+def verificar_ffmpeg():
+    """Comprueba si FFmpeg está accesible."""
+    try:
+        subprocess.run([FFMPEG_PATH, "-version"], capture_output=True, check=True)
+        return True
+    except (subprocess.CalledProcessError, FileNotFoundError):
+        return False
+
 def limpiar_nombre(nombre: str) -> str:
-    """Elimina caracteres inválidos para nombres de carpetas en Windows/Linux."""
+    """Limpia caracteres inválidos para nombres de carpetas."""
     return re.sub(r'[\\/*?:"<>|]', "", nombre)
 
-def descargar_media(video_url: str, carpeta_base_str: str):
-    carpeta_base = Path(carpeta_base_str)
+def descargar_multimedia(url: str, ruta_base_str: str):
+    ruta_base = Path(ruta_base_str)
 
-    ydl_opts_info = {
-        'quiet': True,
-        'extract_flat': 'in_playlist', # Acelera la extracción de info
-        # 'cookiesfrombrowser': ('chrome',),  # 👈 Descomenta si necesitas videos privados
-    }
+    if not verificar_ffmpeg():
+        print("⚠️  Advertencia: No se detectó FFmpeg.")
+        print("El video se descargará, pero la conversión a MP4 universal podría fallar.")
 
-    print("\n⏳ Obteniendo información de la URL...")
+    # 1. Obtener información previa
+    print("\n⏳ Analizando URL...")
+    ydl_opts_info = {'quiet': True, 'extract_flat': 'in_playlist'}
+
     try:
         with yt_dlp.YoutubeDL(ydl_opts_info) as ydl:
-            info = ydl.extract_info(video_url, download=False)
+            info = ydl.extract_info(url, download=False)
     except Exception as e:
-        print(f"❌ Error al leer la URL: {e}")
+        print(f"❌ Error al analizar la URL: {e}")
         return
 
-    # Comprobamos si es una playlist
+    # 2. Configurar destino
     es_playlist = 'entries' in info
-
     if es_playlist:
-        nombre_playlist = limpiar_nombre(info.get('title', 'Playlist_Sin_Nombre'))
-        carpeta_destino = carpeta_base / nombre_playlist
-        print(f"🗂️  Playlist detectada: {nombre_playlist}")
+        nombre_pl = limpiar_nombre(info.get('title', 'playlist'))
+        ruta_destino = ruta_base / nombre_pl
+        print(f"📂 Playlist detectada: {nombre_pl}")
     else:
-        carpeta_destino = carpeta_base
-        print(f"🎬 Video individual detectado: {info.get('title', 'Video')}")
+        ruta_destino = ruta_base
+        print(f"🎬 Video detectado: {info.get('title', 'video')}")
 
-    # Creamos las carpetas si no existen
-    carpeta_destino.mkdir(parents=True, exist_ok=True)
+    ruta_destino.mkdir(parents=True, exist_ok=True)
 
-    # yt-dlp requiere que outtmpl sea un string estándar, así que lo convertimos
-    plantilla_salida = str(carpeta_destino / '%(title)s.%(ext)s')
-
-    opciones_descarga = {
-        'outtmpl': plantilla_salida,
+    # 3. Opciones de descarga y post-procesamiento (Compatibilidad Total)
+    opciones = {
+        'outtmpl': str(ruta_destino / '%(title)s.%(ext)s'),
         'format': 'bestvideo+bestaudio/best',
         'merge_output_format': 'mp4',
+        'ffmpeg_location': FFMPEG_PATH,
+        # Forzar recodificación a formatos universales (H.264 y AAC)
+        'postprocessors': [{
+            'key': 'FFmpegVideoConvertor',
+            'preferedformat': 'mp4',
+        }],
+        'postprocessor_args': [
+            '-c:v', 'libx264',  # Video compatible con todo (H.264)
+            '-c:a', 'aac',      # Audio compatible con todo (AAC)
+            '-pix_fmt', 'yuv420p' # Necesario para compatibilidad con reproductores viejos
+        ],
         'ignoreerrors': True,
-        # 'cookiesfrombrowser': ('chrome',),  # 👈 Descomenta si necesitas videos privados
     }
 
-    print(f"⬇️  Iniciando descarga en: {carpeta_destino.resolve()}")
-    print("-" * 40)
-
+    # 4. Ejecución
+    print(f"🚀 Iniciando descarga en: {ruta_destino.resolve()}")
     try:
-        with yt_dlp.YoutubeDL(opciones_descarga) as ydl:
-            ydl.download([video_url])
-        print("-" * 40)
-        print("✅ Descarga completada.")
+        with yt_dlp.YoutubeDL(opciones) as ydl:
+            ydl.download([url])
+        print("\n✅ ¡Proceso completado con éxito!")
     except Exception as e:
         print(f"❌ Error durante la descarga: {e}")
 
 if __name__ == "__main__":
-    url = input("🔗 Ingresa la URL: ").strip()
-    carpeta = input("📁 Carpeta de destino base: ").strip()
-    descargar_media(url, carpeta)
+    print("--- 📺 DESCARGADOR MULTIMEDIA PRO ---")
+    u = input("🔗 Ingresa la URL (Video o Playlist): ").strip()
+    r = input("📁 Carpeta de destino: ").strip().replace('"', '')
+
+    descargar_multimedia(u, r)
