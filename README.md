@@ -6,8 +6,7 @@ automatizar tareas comunes y facilitar la gestión de archivos y
 directorios.
 
 ## Autor
-
--   @rallende (https://www.github.com/rallende1107)
+ - [@rallende](https://www.github.com/rallende1107)
 
 ## Scripts disponibles
 
