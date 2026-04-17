@@ -24,12 +24,25 @@ def menu_dinamico():
 
         # 3. Construir el menú y un diccionario de opciones automáticamente
         opciones = {}
+
         for i, script in enumerate(sorted(scripts), 1):
-            # Formatear el nombre para que se vea más legible en el menú
-            nombre_limpio = script.replace(".py", "").replace("_", " ").title()
+            nombre_base = script.replace(".py", "")
+
+            # Cortamos el nombre en dos partes usando el primer guion bajo
+            # Ejemplo: "01_listar_directorios" se convierte en ["01", "listar_directorios"]
+            partes = nombre_base.split("_", 1)
+
+            # Si la primera parte es un número, le agregamos un guion elegante
+            if partes[0].isdigit() and len(partes) > 1:
+                texto_restante = partes[1].replace("_", " ").title()
+                nombre_limpio = f"{partes[0]} - {texto_restante}"
+            else:
+                # Si por alguna razón un archivo no tiene número, se formatea normal
+                nombre_limpio = nombre_base.replace("_", " ").title()
+
             print(f"{i}. 🐍 {nombre_limpio}  [{script}]")
 
-            # Guardamos la relación: { "1": "creador_carpetas.py", "2": "gestor_sufijos.py"... }
+            # Guardamos la relación: { "1": "01_creador_carpetas.py", "2": "02_gestor_sufijos.py"... }
             opciones[str(i)] = script
 
         print("-" * 50)
