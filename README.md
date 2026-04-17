@@ -20,9 +20,8 @@ Herramienta de renombrado recursivo que permite reemplazar cadenas de
 texto dentro de nombres de archivos y carpetas (incluyendo espacios).
 Ideal para organizar grandes volúmenes de archivos de forma rápida.
 
-### 3.- Gestor de sufijos (añadir / quitar)
-Permite gestionar nombres de archivos de forma masiva, agregando o
-eliminando sufijos (etiquetas al final del nombre) de manera recursiva.
+### 3.- Gestor Prefijos/Sufijos
+Permite agregar prefijos o sufijos a los nombres de archivos de forma masiva y recursiva, incluyendo soporte para separadores personalizados (_, -). Ideal para etiquetar lotes de archivos.
 
 ### 4.- Creador de Directorios
 Utilidad para la creación de directorios que soporta entrada manual y carga de nombres desde archivos externos (.txt).
@@ -42,6 +41,10 @@ Descargador de videos y listas de reproducción optimizado con yt-dlp. Detecta a
 
 ### 9.- Fusionar directorios
 Consolida el contenido de múltiples subdirectorios en una sola carpeta principal. Elimina automáticamente las carpetas de origen vacías y previene la pérdida de datos renombrando inteligentemente los archivos si detecta nombres duplicados.
+
+### 10.- Extractor Multimedia
+Herramienta todo-en-uno para la extracción y organización de archivos multimedia. Permite buscar imágenes o videos de forma recursiva, copiarlos o moverlos a un destino único, y renombrarlos automáticamente usando una secuencia numérica o su ruta de origen para evitar conflictos.
+
 
 
 ## Requisitos
