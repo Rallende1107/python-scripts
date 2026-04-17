@@ -51,6 +51,14 @@ Herramienta de organización cronológica para bitácoras de desarrollo (Dev Log
 ### 12.- Conversor Multimedia
 Potente conversor de medios que transforma imágenes a formato WebP y videos a WebM de forma masiva. Utiliza Pillow y MoviePy para optimizar el peso de los archivos de un directorio completo, con opciones para limpieza automática de los archivos originales.
 
+### 13.- Limpiador de Imágenes Pequeñas
+Escanea un directorio en busca de imágenes que no cumplan con un tamaño mínimo en píxeles (ancho o alto) y las elimina. Ideal para limpiar miniaturas (thumbnails) o íconos no deseados extraídos de web scraping o descargas masivas.
+
+### 14.- Limpiador de Transparencias (Imágenes en blanco)
+Analiza el canal alfa de las imágenes (RGBA) y elimina aquellas que superen un porcentaje de transparencia definido por el usuario. Excelente utilidad para descartar sprites vacíos o recortes fallidos.
+
+### 15.- Renombrador Secuencial
+Renombra masivamente todos los archivos de una carpeta utilizando un nombre base proporcionado por el usuario y añadiendo un contador secuencial automático separado por extensiones (ej. Viaje (1).jpg, Viaje (2).jpg, Viaje (1).mp4).
 
 
 ## Requisitos
