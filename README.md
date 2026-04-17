@@ -10,28 +10,35 @@ directorios.
 
 ## Scripts disponibles
 
-### Listar Directorios
+### 1.- Listar Directorios
 Permite ingresar una ruta y muestra de forma ordenada todas las carpetas
 contenidas en ese directorio. Utiliza generadores para optimizar el uso
 de memoria y maneja errores comunes como rutas inexistentes o falta de permisos.
 
-### Limpiar Nombres
+### 2.- Limpiar Nombres
 Herramienta de renombrado recursivo que permite reemplazar cadenas de
 texto dentro de nombres de archivos y carpetas (incluyendo espacios).
 Ideal para organizar grandes volúmenes de archivos de forma rápida.
 
-### Gestor de sufijos (añadir / quitar)
+### 3.- Gestor de sufijos (añadir / quitar)
 Permite gestionar nombres de archivos de forma masiva, agregando o
 eliminando sufijos (etiquetas al final del nombre) de manera recursiva.
 
-### Creador de Directorios
+### 4.- Creador de Directorios
 Utilidad para la creación de directorios que soporta entrada manual y carga de nombres desde archivos externos (.txt).
 
-### Reorganizador Estructural (Regex)
+### 5.- Reorganizador Estructural (Regex)
 Reestructura directorios que siguen el formato Nombre [Versión] [Autor]. El script extrae los datos mediante expresiones regulares, crea una nueva jerarquía basada en el autor y mueve el contenido a subcarpetas de versión, eliminando los directorios originales vacíos. Ideal para organizar librerías o assets de forma jerárquica.
 
-### Limpiador de Carpetas
+### 6.- Limpiador de Carpetas
 Filtra y renombra directorios en el nivel principal de una ruta eliminando palabras específicas. Incluye validaciones de seguridad para evitar nombres vacíos o colisiones con carpetas ya existentes, asegurando una limpieza de nombres rápida y sin pérdida de datos.
+
+
+### 7.- Vaciador de Directorios
+Utilidad destructiva pero segura para vaciar completamente un directorio sin eliminar la carpeta raíz. Cuenta con un sistema de confirmación de usuario, elimina recursivamente subcarpetas y limpia archivos regulares y enlaces simbólicos.
+
+### 8.- Descargador de YouTube (y otros sitios)
+Descargador de videos y listas de reproducción optimizado con yt-dlp. Detecta automáticamente si la URL pertenece a un video individual o una playlist, creando una subcarpeta sanitizada para organizar las descargas, y fusiona la mejor calidad de video y audio en formato MP4.
 
 ## Requisitos
 -   Python 3.14.0
