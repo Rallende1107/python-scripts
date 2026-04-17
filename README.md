@@ -45,6 +45,8 @@ Consolida el contenido de múltiples subdirectorios en una sola carpeta principa
 ### 10.- Extractor Multimedia
 Herramienta todo-en-uno para la extracción y organización de archivos multimedia. Permite buscar imágenes o videos de forma recursiva, copiarlos o moverlos a un destino único, y renombrarlos automáticamente usando una secuencia numérica o su ruta de origen para evitar conflictos.
 
+### 11.- Estandarizar DevLogs
+Herramienta de organización cronológica para bitácoras de desarrollo (Dev Logs). Escanea carpetas con múltiples formatos de fecha, las ordena temporalmente y las renombra con un estándar limpio (Dev Log #X - DD.MM.YYYY), manteniendo un contador independiente para cada año.
 
 
 ## Requisitos
