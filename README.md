@@ -40,6 +40,10 @@ Utilidad destructiva pero segura para vaciar completamente un directorio sin eli
 ### 8.- Descargador de YouTube (y otros sitios)
 Descargador de videos y listas de reproducción optimizado con yt-dlp. Detecta automáticamente si la URL pertenece a un video individual o una playlist, creando una subcarpeta sanitizada para organizar las descargas, y fusiona la mejor calidad de video y audio en formato MP4.
 
+### 9.- Fusionar directorios
+Consolida el contenido de múltiples subdirectorios en una sola carpeta principal. Elimina automáticamente las carpetas de origen vacías y previene la pérdida de datos renombrando inteligentemente los archivos si detecta nombres duplicados.
+
+
 ## Requisitos
 -   Python 3.14.0
 -   pip 26.0.1
