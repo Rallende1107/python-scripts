@@ -1,38 +1,60 @@
 import os
+from pathlib import Path
 
-def menu():
+def menu_dinamico():
+    carpeta_tools = Path("tools")
+
+    # 1. Validar que la carpeta tools exista
+    if not carpeta_tools.exists() or not carpeta_tools.is_dir():
+        print("❌ Error: No se encontró la carpeta 'tools'.")
+        return
+
     while True:
-        print("\n" + "="*40)
-        print("   🛠️  MI CAJA DE HERRAMIENTAS PYTHON")
-        print("="*40)
-        print("1.-  Listar Directorios")
-        print("2.-  Creador de Carpetas")
-        print("3.-  Gestor de Sufijos (Añadir/Quitar)")
-        print("4.-  Limpiar Nombres (Archivos y Carpetas)")
-        print("5.-  Limpiar Nombres de Carpetas (Palabra específica)")
-        print("6.-  Organizar por Autor (Regex)")
-        print("-" * 40)
-        print("0.-  Salir")
+        # 2. Buscar todos los archivos .py en la carpeta tools
+        # Ignoramos archivos que empiecen con "__" (como __init__.py)
+        scripts = [archivo.name for archivo in carpeta_tools.glob("*.py") if not archivo.name.startswith("__")]
 
-        opcion = input("\n¿Qué herramienta quieres usar? (0-6): ").strip()
+        if not scripts:
+            print("⚠️ No se encontraron scripts en la carpeta 'tools'.")
+            break
 
-        if opcion == "1":
-            os.system("python tools/listar_directorios.py")
-        elif opcion == "2":
-            os.system("python tools/creador_carpetas.py")
-        elif opcion == "3":
-            os.system("python tools/gestor_sufijos.py")
-        elif opcion == "4":
-            os.system("python tools/limpiar_nombres.py")
-        elif opcion == "5":
-            os.system("python tools/limpiar_nombres_carpetas.py")
-        elif opcion == "6":
-            os.system("python tools/organizar_por_autor.py")
-        elif opcion == "0":
+        print("\n" + "="*50)
+        print("   🛠️  MI CAJA DE HERRAMIENTAS PYTHON (AUTO)")
+        print("="*50)
+
+        # 3. Construir el menú y un diccionario de opciones automáticamente
+        opciones = {}
+        for i, script in enumerate(sorted(scripts), 1):
+            # Formatear el nombre para que se vea más legible en el menú
+            nombre_limpio = script.replace(".py", "").replace("_", " ").title()
+            print(f"{i}. 🐍 {nombre_limpio}  [{script}]")
+
+            # Guardamos la relación: { "1": "creador_carpetas.py", "2": "gestor_sufijos.py"... }
+            opciones[str(i)] = script
+
+        print("-" * 50)
+        print("0. ❌ Salir")
+
+        # 4. Pedir la opción al usuario
+        seleccion = input(f"\n¿Qué herramienta quieres usar? (0-{len(scripts)}): ").strip()
+
+        if seleccion == "0":
             print("\n👋 ¡Gracias por usar la caja de herramientas! Hasta luego.\n")
             break
+        elif seleccion in opciones:
+            script_elegido = opciones[seleccion]
+            ruta_script = carpeta_tools / script_elegido
+
+            print(f"\n🚀 Iniciando: {script_elegido}...")
+            print("-" * 30)
+
+            # 5. Ejecutar el script seleccionado
+            os.system(f'python "{ruta_script}"')
+
+            print("-" * 30)
+            print("✅ Ejecución finalizada. Volviendo al menú principal...")
         else:
-            print("\n❌ Opción no válida. Por favor, selecciona un número del 0 al 6.")
+            print(f"\n❌ Opción no válida. Por favor, selecciona un número del 0 al {len(scripts)}.")
 
 if __name__ == "__main__":
-    menu()
+    menu_dinamico()
