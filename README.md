@@ -10,19 +10,23 @@ directorios.
 
 ## Scripts disponibles
 
-### listar_directorios
+### Listar Directorios
 Permite ingresar una ruta y muestra de forma ordenada todas las carpetas
 contenidas en ese directorio. Utiliza generadores para optimizar el uso
 de memoria y maneja errores comunes como rutas inexistentes o falta de permisos.
 
-### limpiar_nombres
+### Limpiar Nombres
 Herramienta de renombrado recursivo que permite reemplazar cadenas de
 texto dentro de nombres de archivos y carpetas (incluyendo espacios).
 Ideal para organizar grandes volúmenes de archivos de forma rápida.
 
-### gestor_sufijos (añadir / quitar)
+### Gestor de sufijos (añadir / quitar)
 Permite gestionar nombres de archivos de forma masiva, agregando o
 eliminando sufijos (etiquetas al final del nombre) de manera recursiva.
+
+### Creador de Directorios
+Utilidad para la creación de directorios que soporta entrada manual y carga de nombres desde archivos externos (.txt).
+
 
 ## Requisitos
 -   Python 3.14.0
