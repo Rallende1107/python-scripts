@@ -26,17 +26,17 @@ Permite agregar prefijos o sufijos a los nombres de archivos de forma masiva y r
 ### 4.- Creador de Directorios
 Utilidad para la creación de directorios que soporta entrada manual y carga de nombres desde archivos externos (.txt).
 
-### 5.- Reorganizador Estructural (Regex)
+### 5.- Reorganizador Estructural por autor (Regex)
 Reestructura directorios que siguen el formato Nombre [Versión] [Autor]. El script extrae los datos mediante expresiones regulares, crea una nueva jerarquía basada en el autor y mueve el contenido a subcarpetas de versión, eliminando los directorios originales vacíos. Ideal para organizar librerías o assets de forma jerárquica.
 
-### 6.- Limpiador de Carpetas
+### 6.- Limpiar nombre de Carpetas
 Filtra y renombra directorios en el nivel principal de una ruta eliminando palabras específicas. Incluye validaciones de seguridad para evitar nombres vacíos o colisiones con carpetas ya existentes, asegurando una limpieza de nombres rápida y sin pérdida de datos.
 
 
 ### 7.- Vaciador de Directorios
 Utilidad destructiva pero segura para vaciar completamente un directorio sin eliminar la carpeta raíz. Cuenta con un sistema de confirmación de usuario, elimina recursivamente subcarpetas y limpia archivos regulares y enlaces simbólicos.
 
-### 8.- Descargador de YouTube (y otros sitios)
+### 8.- Descargar videos
 Descargador de videos y listas de reproducción optimizado con yt-dlp. Detecta automáticamente si la URL pertenece a un video individual o una playlist, creando una subcarpeta sanitizada para organizar las descargas, y fusiona la mejor calidad de video y audio en formato MP4.
 
 ### 9.- Fusionar directorios
